@@ -1,7 +1,6 @@
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 import soundfile as sf
 
-# Загрузка предварительно обученной модели и процессора
 processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-xlsr-53-russian")
 model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-xlsr-53-russian")
 
@@ -16,7 +15,6 @@ def transcribe_audio(audio_file_path):
     transcription : str
         Транскрибированный текст аудиофайла
     """
-    # Загрузка аудиофайла
     speech, sample_rate = sf.read(audio_file_path)
 
     input_features = processor(speech, sampling_rate=sample_rate, return_tensors="pt", padding=True)
